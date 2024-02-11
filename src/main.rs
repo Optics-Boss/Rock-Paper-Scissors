@@ -38,30 +38,30 @@ fn get_rock_papers_scissors() -> i32 {
 
 fn get_winner(player_choice: i32, opponent_choice: i32) {
     if player_choice == opponent_choice {
-        println!("It's a tie");
+        return println!("It's a tie");
     } 
 
     let player_choice = number_to_hand(player_choice);
     let opponent_choice = number_to_hand(opponent_choice);
 
     if player_choice == "Rock" {
-        if opponent_choice == "Scissor" {
-            println!("You won");
-        } else if opponent_choice == "Paper" {
-            println!("You lose");
-        }
+        match opponent_choice {
+            "Scissor" => println!("You won"),
+            "Paper" => println!("You lose"),
+            _ => println!("Unknown"),
+        };
     } else if player_choice == "Paper" {
-        if opponent_choice == "Rock" {
-            println!("You won");
-        } else if opponent_choice == "Scissor" {
-            println!("You lose");
-        }
+        match opponent_choice {
+            "Rock" => println!("You won"),
+            "Scissor" => println!("You lose"),
+            _ => println!("Unknown"),
+        };
     } else if player_choice == "Scissor" {
-        if opponent_choice == "Paper" {
-            println!("You won");
-        } else if opponent_choice == "Rock" {
-            println!("You lose");
-        }
+        match opponent_choice {
+            "Paper" => println!("You won"),
+            "Rock" => println!("You lose"),
+            _ => println!("Unknown"),
+        };
     }
 }
 
@@ -72,4 +72,15 @@ fn number_to_hand(number: i32) -> &'static str {
         3 => "Scissor",
         _ => "Unknown"
     }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_number_to_hand() {
+        assert_eq!(number_to_hand(1), "Rock");
+    }
+
 }
